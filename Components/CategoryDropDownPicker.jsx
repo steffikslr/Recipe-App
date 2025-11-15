@@ -3,7 +3,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function CategoryDropDownPicker() {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('Abendessen');
+  const [value, setValue] = useState(null);
   const [items, setItems] = useState([
     { label: 'Abendessen', value: 'Abendessen' },
     { label: 'Mittagessen', value: 'Mittagessen' },
@@ -22,6 +22,7 @@ export default function CategoryDropDownPicker() {
       setValue={setValue}
       setItems={setItems}
       containerStyle={{ width: '80%' }}
+      placeholder="Wähle eine Kategorie"
     />
   );
 }

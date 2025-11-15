@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Keyboard, Pressable, StyleSheet, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
 import CategoryDropDownPicker from '../Components/CategoryDropDownPicker';
@@ -7,25 +8,44 @@ import { Colors } from "../Constants/Colors";
 import useDB from '../hooks/useDB';
 
 export default function createRecipe() {
-    const [name, setName] = useState('');
-    const [shortDesc, setShortDesc] = useState('');
-    const [category, setCategory] = useState('Mittagessen')
-    const [freeTextIngredients, setFreeTextIngredients] = useState('')
-    const [description, setDescription] = useState('')
-    const [visible, setVisible] = useState(false);
+    const [name, setName] = useState(null);
+    const [shortDesc, setShortDesc] = useState(null);
+    const [category, setCategory] = useState(null)
+    const [freeTextIngredients, setFreeTextIngredients] = useState(null)
+    const [description, setDescription] = useState(null)
     const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState(null)
 
-    const openMenu = () => setVisible(true);
-    const closeMenu = () => setVisible(false);
+
 
     // DB Context
      const { createRecipe } = useDB();
 
+     // routing
+     const route = useRouter()
+
     const handleSubmit = async () => {
         try {
-            const promise = createRecipe({
-                name: {name}
-            })
+            const result = await createRecipe({
+                name: name,
+                shortDescription: shortDesc,
+                description: description,
+                category: category,
+                rating: rating,
+                additionalIngredients: freeTextIngredients,
+                comment: comment,
+               
+            });
+            route.replace("/")
+            // set states back to initial state
+            setName(null),
+            setShortDesc(null),
+            setCategory(null)
+            setComment(null)
+            setRating(0)
+            setFreeTextIngredients(null)
+            setDescription(null)
+
         }
         catch(error){
             console.log(error)

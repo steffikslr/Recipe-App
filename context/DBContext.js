@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import { databases, ID } from "../lib/appwrite";
 
-const DBContext = createContext()
+export const DBContext = createContext()
 
 export const DBProvider = ({ children }) => {
   const [recipes, setRecipes] = useState([]);
@@ -15,10 +15,10 @@ export const DBProvider = ({ children }) => {
 
     const createRecipe = async (data) => {
         try {
-            const promise = databases.createRow({
+            const promise = databases.createDocument({
                 databaseId: DATABASE_ID,
-                tableId: TABLE_ID_RECIPES,
-                rowId: ID.unique(),
+                collectionId: TABLE_ID_RECIPES,
+                documentId : ID.unique(),
                 data: data 
             })
 
