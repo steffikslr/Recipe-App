@@ -4,6 +4,7 @@ import CategoryDropDownPicker from '../Components/CategoryDropDownPicker';
 import Spacer from '../Components/Spacer';
 import ThemedView from '../Components/ThemedView';
 import { Colors } from "../Constants/Colors";
+import useDB from '../hooks/useDB';
 
 export default function createRecipe() {
     const [name, setName] = useState('');
@@ -17,7 +18,18 @@ export default function createRecipe() {
     const openMenu = () => setVisible(true);
     const closeMenu = () => setVisible(false);
 
+    // DB Context
+     const { createRecipe } = useDB();
+
     const handleSubmit = async () => {
+        try {
+            const promise = createRecipe({
+                name: {name}
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
 
     }
   return (
