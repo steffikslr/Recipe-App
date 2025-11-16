@@ -31,7 +31,7 @@ export default function Layout() {
       />
 
        <Tabs.Screen
-        name="createRecipe"
+        name="(recipe)/create"
         options={{
           title:'Neues Rezept',
           tabBarIcon: ({focused}) => (
@@ -48,6 +48,10 @@ export default function Layout() {
           ), 
         }}
       />
+
+
+
+      
       
 
 

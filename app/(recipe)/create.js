@@ -1,11 +1,11 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Keyboard, Pressable, StyleSheet, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
-import CategoryDropDownPicker from '../Components/CategoryDropDownPicker';
-import Spacer from '../Components/Spacer';
-import ThemedView from '../Components/ThemedView';
-import { Colors } from "../Constants/Colors";
-import useDB from '../hooks/useDB';
+import CategoryDropDownPicker from '../../Components/CategoryDropDownPicker';
+import Spacer from '../../Components/Spacer';
+import ThemedView from '../../Components/ThemedView';
+import { Colors } from "../../Constants/Colors";
+import useDB from '../../hooks/useDB';
 
 export default function createRecipe() {
     const [name, setName] = useState(null);
