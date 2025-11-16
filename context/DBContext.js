@@ -15,7 +15,7 @@ export const DBProvider = ({ children }) => {
 
     const createRecipe = async (data) => {
         try {
-            const promise = databases.createDocument({
+            const promise = await databases.createDocument({
                 databaseId: DATABASE_ID,
                 collectionId: TABLE_ID_RECIPES,
                 documentId : ID.unique(),

@@ -36,6 +36,7 @@ export default function createRecipe() {
                 comment: comment,
                
             });
+
             route.replace("/")
             // set states back to initial state
             setName(null),
