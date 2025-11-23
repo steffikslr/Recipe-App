@@ -4,6 +4,7 @@ import { Keyboard, Pressable, ScrollView, StyleSheet, Text, TouchableWithoutFeed
 import AdditionalNutrition from '../../Components/ingredients/AdditionalNutrition'
 import CreateHeader from '../../Components/ingredients/CreateHeader'
 import NutritionCard from '../../Components/ingredients/NutritionCard'
+import NutritionTab from '../../Components/ingredients/NutritionTab'
 import Spacer from '../../Components/Spacer'
 import ThemedView from '../../Components/ThemedView'
 import { Colors } from '../../Constants/Colors'
@@ -27,34 +28,25 @@ const Create = () => {
   const [activeTab, setActiveTab] = useState('tab1')
 
   const createIngredient = async () => {
+    console.log("Create ingredient")
 
   }
 
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 
         <ThemedView safe={false} style={styles.container}>
           
           <CreateHeader name={name} setName={setName} />
+
+          <NutritionTab activeTab={activeTab} setActiveTab={setActiveTab} />
           
-          <Spacer height={30} />
-
-         <View style={styles.tabContainer}>
-            <Pressable style={styles.tab} onPress={() => setActiveTab('tab1')}>
-              <Text>Nährstoffe</Text>
-            </Pressable>
-            <Pressable style={styles.tab} onPress={() => setActiveTab('tab2')}>
-              <Text>Weitere Nährstoffe</Text>
-            </Pressable>
-
-         </View>
-
-
-
-
-
+        
+         {activeTab == 'tab1' ? (
+          <View>
+          <Spacer height={30}/>
           <View style={styles.containerNutrition}>
             <NutritionCard label={"Kalorien"} value={nutrition.calories} onChangeText={(value) => setNutrition({...nutrition, calories: value})}></NutritionCard>
             <NutritionCard label={"Protein"} value={nutrition.protein} onChangeText={(value) => setNutrition({...nutrition, protein: value})}></NutritionCard>
@@ -62,13 +54,23 @@ const Create = () => {
             <NutritionCard label={"Zucker"} value={nutrition.sugar} onChangeText={(value) => setNutrition({...nutrition, sugar: value})}></NutritionCard>
             <NutritionCard label={"ges. Fettsäuren"} value={nutrition.saturatedFat} onChangeText={(value) => setNutrition({...nutrition, saturatedFat: value})}></NutritionCard>
             <NutritionCard label={"unges. Fettsäuren"} value={nutrition.fat} onChangeText={(value) => setNutrition({...nutrition, fat: value})}></NutritionCard>
+          </View> 
           </View>
-          <Spacer />
-          <Text>Zusätzliche Nährstoffe</Text>
-          <Spacer height={20} />
-          <AdditionalNutrition valueLabel={nutrition.nutrient1Label} onChangeTextLabel={(value) => setNutrition({...nutrition, nutrient1Label: value})} value={nutrition.nutrient1Value} onChangeText={(value) => setNutrition({...nutrition, nutrient1Value: value})}></AdditionalNutrition>
-          <AdditionalNutrition valueLabel={nutrition.nutrient2Label} onChangeTextLabel={(value) => setNutrition({...nutrition, nutrient2Label: value})} value={nutrition.nutrient2Value} onChangeText={(value) => setNutrition({...nutrition, nutrient2Value: value})}></AdditionalNutrition>
-          <AdditionalNutrition valueLabel={nutrition.nutrient3Label} onChangeTextLabel={(value) => setNutrition({...nutrition, nutrient3Label: value})} value={nutrition.nutrient3Value} onChangeText={(value) => setNutrition({...nutrition, nutrient3Value: value})}></AdditionalNutrition>
+        ):
+        
+        (
+              <View style={styles.containerAdditionalNutrition}>
+                <Spacer />
+                <Text>Zusätzliche Nährstoffe (z.B. Eisen) </Text>
+                <Spacer height={20} />
+                <AdditionalNutrition valueLabel={nutrition.nutrient1Label} onChangeTextLabel={(value) => setNutrition({ ...nutrition, nutrient1Label: value })} value={nutrition.nutrient1Value} onChangeText={(value) => setNutrition({ ...nutrition, nutrient1Value: value })}></AdditionalNutrition>
+                <AdditionalNutrition valueLabel={nutrition.nutrient2Label} onChangeTextLabel={(value) => setNutrition({ ...nutrition, nutrient2Label: value })} value={nutrition.nutrient2Value} onChangeText={(value) => setNutrition({ ...nutrition, nutrient2Value: value })}></AdditionalNutrition>
+                <AdditionalNutrition valueLabel={nutrition.nutrient3Label} onChangeTextLabel={(value) => setNutrition({ ...nutrition, nutrient3Label: value })} value={nutrition.nutrient3Value} onChangeText={(value) => setNutrition({ ...nutrition, nutrient3Value: value })}></AdditionalNutrition>
+
+
+              </View>
+
+        )}
 
           <Spacer height={30} />
 
@@ -97,12 +99,6 @@ const styles = StyleSheet.create({
     rowGap: 20,
   },
 
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold'
-  },
- 
-
   button: {
     width: '40%',
     height: 50,
@@ -113,7 +109,9 @@ const styles = StyleSheet.create({
 
   },
 
- 
-
+  containerAdditionalNutrition: {
+    alignItems: 'center'
+    
+  },
     
 })

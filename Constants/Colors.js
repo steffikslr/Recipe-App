@@ -6,5 +6,7 @@ export const Colors = {
     tabBG: '#1C3738',
     cardBackground: '#c8e8c6ff',
     headerIngredientBG: '#E7F6E6',
+    tabBarContainer: 'rgba(247, 252, 247, 0.5)',
+    activeTab: '#60935D',
     
 }
