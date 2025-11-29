@@ -1,18 +1,18 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
-import { Colors } from '../../Constants/Colors'
+import { Colors } from '../Constants/Colors'
 
-const NutritionTab = ({activeTab, setActiveTab}) => {
+const TabBar = ({activeTab, setActiveTab, tabLabel1, tabLabel2}) => {
   return (
     <View style={styles.tabContainer}>
             <Pressable style={ activeTab == 'tab1' ? [styles.tab, styles.activeTab]: styles.tab} 
             onPress={() => setActiveTab('tab1')}>
               <Text style={activeTab == 'tab1' ? [styles.tabText, styles.activeTabText] : styles.tabText}
-              >Nährstoffe
+              >{tabLabel1}
               </Text>
             </Pressable>
             <Pressable style={ activeTab == 'tab2' ? [styles.tab, styles.activeTab]: styles.tab}  onPress={() => setActiveTab('tab2')}>
               <Text style={activeTab == 'tab2' ? [styles.tabText, styles.activeTabText] : styles.tabText}>
-                Weitere Nährstoffe
+                {tabLabel2}
               </Text>
             </Pressable>
 
@@ -20,7 +20,7 @@ const NutritionTab = ({activeTab, setActiveTab}) => {
   )
 }
 
-export default NutritionTab
+export default TabBar
 
 const styles = StyleSheet.create({
     tabContainer: {

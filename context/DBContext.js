@@ -10,6 +10,7 @@ export const DBProvider = ({ children }) => {
   const DATABASE_ID = '6910c4f20013c6d65e39';
   const TABLE_ID_RECIPES = 'recipes'
   const TABLE_ID_INGREDIENTS = 'ingredients'
+  const TABLE_ID_RECIPE_INGREDIENTS = 'recipe_ingredients'
 
   
 
@@ -29,8 +30,22 @@ export const DBProvider = ({ children }) => {
 
     }
 
+    const createIngredient = async (data) => {
+      try{
+        const promise = await databases.createDocument({
+          databaseId: DATABASE_ID,
+          collectionId: TABLE_ID_INGREDIENTS,
+          documentId: ID.unique(),
+          data: data
+        })
+      }
+      catch(error){
+        throw new Error(error)
+      }
+    }
+
 return (
-    <DBContext.Provider value={{ recipes, ingredients, createRecipe }}>
+    <DBContext.Provider value={{ recipes, ingredients, createRecipe, createIngredient }}>
       {children}
     </DBContext.Provider>
   );

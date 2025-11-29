@@ -13,11 +13,8 @@ export default function Layout() {
       {
         headerShown: false,
         tabBarStyle: {...styles.tab},
-         tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "grey",
-        
-        
-        
+        tabBarActiveTintColor: "white",
+        tabBarInactiveTintColor: "grey", 
       }
     }>
       <Tabs.Screen
@@ -37,6 +34,7 @@ export default function Layout() {
           tabBarIcon: ({focused}) => (
             <Ionicons name={focused ? 'create' : 'create-outline'} size={24} color={focused ? 'white' : "grey"}/>
           ), 
+          headerShown: true,
         }} />
 
       <Tabs.Screen
