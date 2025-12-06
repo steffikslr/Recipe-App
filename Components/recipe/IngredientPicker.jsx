@@ -30,7 +30,7 @@ const IngredientPicker = ({ setValueIngredients, onClose }) => {
         try {
             const searchResult = await fetchIngredientsByName(query);
             setIngredients(searchResult);
-            console.log(searchResult)
+        
         } catch (err) {
             console.log(err);
         }
