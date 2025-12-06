@@ -1,3 +1,4 @@
+import { Query } from "appwrite";
 import { createContext, useState } from "react";
 import { databases, ID } from "../lib/appwrite";
 
@@ -44,8 +45,43 @@ export const DBProvider = ({ children }) => {
       }
     }
 
+    const fetchAllIngredients = async () => {
+      try {
+        const response = await databases.listDocuments(
+          DATABASE_ID,
+          TABLE_ID_INGREDIENTS
+        )
+        return response.documents;
+
+      }
+      catch(error){
+        throw new Error(error);
+      }
+
+    }
+
+    const fetchIngredientsByName = async (name) => {
+      try {
+        const response = await databases.listDocuments(
+          DATABASE_ID,
+          TABLE_ID_INGREDIENTS,
+          [
+            Query.search("name", name)
+          ]
+
+        )
+        if (!name) return fetchAllIngredients();
+        return response.documents;
+
+      }
+      catch(error){
+        throw new Error(error);
+      }
+
+    }
+
 return (
-    <DBContext.Provider value={{ recipes, ingredients, createRecipe, createIngredient }}>
+    <DBContext.Provider value={{ recipes, ingredients, createRecipe, createIngredient, fetchAllIngredients, fetchIngredientsByName }}>
       {children}
     </DBContext.Provider>
   );

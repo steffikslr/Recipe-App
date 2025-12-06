@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text } from 'react-native';
-import { Colors } from '../Constants/Colors';
+import { Colors } from '../../Constants/Colors';
 
 export default function CategoryPicker({category, setCategory}) {
   const [open, setOpen] = useState(false);
