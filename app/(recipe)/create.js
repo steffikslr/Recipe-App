@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Keyboard, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CategoryPicker from '../../Components/recipe/CategoryPicker';
 import IngredientTab from '../../Components/recipe/IngredientTab';
 import PictureSelect from '../../Components/recipe/PictureSelect';
@@ -66,10 +67,8 @@ export default function CreateRecipe() {
     return (
 
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
-            <ScrollView
-               >
-            
-                
+            <KeyboardAwareScrollView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+            <ScrollView>
 
                     <ThemedView safe={false} style={{ flex: 1 }}>
 
@@ -133,6 +132,7 @@ export default function CreateRecipe() {
                     </ThemedView>
 
                 </ScrollView>
+                </KeyboardAwareScrollView>
             
         </TouchableWithoutFeedback>
     )
