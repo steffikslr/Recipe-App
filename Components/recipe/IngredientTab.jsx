@@ -52,7 +52,7 @@ const IngredientTab = ({ placeholder, valueFreeText, setValueFreeText, valueIngr
 
             {isFreeTextIngredients &&
                 <TextInput
-                    style={[styles.freeTextInput, { height: 150 }]}
+                    style={[styles.freeTextInput, { height: 150, textAlignVertical: 'top' }]}
                     placeholder={placeholder}
                     placeholderTextColor='grey'
                     value={valueFreeText}
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         paddingHorizontal: 12,
         color: Colors.fontColor,
-        backgroundColor: "white",
+        backgroundColor: 'white',
         alignSelf: 'flex-start',
         marginLeft: 30,
 

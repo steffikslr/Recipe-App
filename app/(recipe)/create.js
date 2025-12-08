@@ -1,7 +1,8 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Keyboard, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Keyboard, KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+
+import { Platform } from 'react-native';
 import CategoryPicker from '../../Components/recipe/CategoryPicker';
 import IngredientTab from '../../Components/recipe/IngredientTab';
 import PictureSelect from '../../Components/recipe/PictureSelect';
@@ -67,8 +68,13 @@ export default function CreateRecipe() {
     return (
 
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
-            <KeyboardAwareScrollView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
-            <ScrollView>
+            
+                <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                    keyboardVerticalOffset={100}
+                >
+                    <ScrollView>
 
                     <ThemedView safe={false} style={{ flex: 1 }}>
 
@@ -85,7 +91,7 @@ export default function CreateRecipe() {
                             />
                             <Spacer height={5} />
                             <TextInput
-                                style={[styles.input, { height: 65 }]}
+                                style={[styles.input, { height: 65, textAlignVertical: 'top'}]}
                                 placeholder="Kurzbeschreibung"
                                 placeholderTextColor='grey'
                                 value={shortDesc}
@@ -99,7 +105,7 @@ export default function CreateRecipe() {
                             <Spacer height={20} />
                             {activeTab == 'tab2' ?
                                 <TextInput
-                                    style={[styles.input, { height: 200 }]}
+                                    style={[styles.input, { height: 200, textAlignVertical: 'top' }]}
                                     placeholder="Beschreibung"
                                     placeholderTextColor='grey'
                                     value={description}
@@ -130,9 +136,11 @@ export default function CreateRecipe() {
                         </View>
 
                     </ThemedView>
-
-                </ScrollView>
-                </KeyboardAwareScrollView>
+                    </ScrollView>
+            </KeyboardAvoidingView>
+            
+             
+                
             
         </TouchableWithoutFeedback>
     )
