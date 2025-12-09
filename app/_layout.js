@@ -1,6 +1,7 @@
 import { FontAwesome6, Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { StyleSheet } from "react-native";
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { Colors } from "../Constants/Colors";
 import { DBProvider } from "../context/DBContext";
 
@@ -9,6 +10,7 @@ import { DBProvider } from "../context/DBContext";
 export default function Layout() {
   return (
     <DBProvider>
+      <KeyboardProvider>
     <Tabs screenOptions={
       {
         headerShown: false,
@@ -54,6 +56,7 @@ export default function Layout() {
 
 
     </Tabs> 
+    </KeyboardProvider>
     </DBProvider>
   )
 }
